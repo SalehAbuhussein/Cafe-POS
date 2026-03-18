@@ -91,7 +91,7 @@ The system is designed to handle core cafe operations:
 ### Setup
 
 1. Clone the repository
-2. Restore the database
+2. Restore the database (https://drive.google.com/file/d/17Hl-_VUW9O9FxEDsHEdJlxAU7oW1npsD/view?usp=sharing).
 3. Update connection string in the project
 4. Run the application
 
