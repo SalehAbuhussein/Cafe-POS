@@ -48,6 +48,19 @@ A desktop **Point of Sale (POS)** application built with **C# and Windows Forms*
 
 ---
 
+## 🗄️ Database Schema
+
+The following diagram shows the database design of the system:
+
+<img width="1311" height="819" alt="Cafe POS drawio" src="https://github.com/user-attachments/assets/2d1b0280-0c22-4f7c-a11e-d0eb85d4f831" />
+
+* Users and roles are connected through a many-to-many relationship.
+* Orders contain multiple order items.
+* Refunds support both full and partial refunds.
+* Products are linked to categories and support restocking.
+
+---
+
 ## 🛠️ Technologies Used
 
 * **C#**
@@ -92,17 +105,6 @@ The system is designed to handle core cafe operations:
 * **Staff**
 
   * Limited access (orders, basic operations)
-
----
-
-## 📈 Future Improvements
-
-* Payment methods (cash/card split)
-* Reports & analytics
-* Notifications system
-* Better UI/UX
-
----
 
 ## 👨‍💻 Author
 
