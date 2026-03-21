@@ -134,32 +134,32 @@
             this.refundToolStripMenuItem,
             this.refundHistoryToolStripMenuItem});
             this.cmsOrders.Name = "cmsOrders";
-            this.cmsOrders.Size = new System.Drawing.Size(181, 98);
+            this.cmsOrders.Size = new System.Drawing.Size(154, 76);
             this.cmsOrders.Opening += new System.ComponentModel.CancelEventHandler(this.cmsOrders_Opening);
             // 
             // detailsToolStripMenuItem
             // 
             this.detailsToolStripMenuItem.Name = "detailsToolStripMenuItem";
-            this.detailsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.detailsToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.detailsToolStripMenuItem.Text = "Details";
             this.detailsToolStripMenuItem.Click += new System.EventHandler(this.detailsToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(150, 6);
             // 
             // refundToolStripMenuItem
             // 
             this.refundToolStripMenuItem.Name = "refundToolStripMenuItem";
-            this.refundToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.refundToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.refundToolStripMenuItem.Text = "Refund";
             this.refundToolStripMenuItem.Click += new System.EventHandler(this.refundToolStripMenuItem_Click);
             // 
             // refundHistoryToolStripMenuItem
             // 
             this.refundHistoryToolStripMenuItem.Name = "refundHistoryToolStripMenuItem";
-            this.refundHistoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.refundHistoryToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.refundHistoryToolStripMenuItem.Text = "Refund History";
             this.refundHistoryToolStripMenuItem.Click += new System.EventHandler(this.refundHistoryToolStripMenuItem_Click);
             // 

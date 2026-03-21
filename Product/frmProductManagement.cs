@@ -160,5 +160,26 @@ namespace Cafe_Management_System.Product
             frmProductInfo frm = new frmProductInfo(productID);
             frm.ShowDialog();
         }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int productID = Convert.ToInt32(dgvProducts.CurrentRow.Cells["ProductID"].Value);
+
+            if (
+                MessageBox.Show("Are you sure you want to delete this product?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) 
+                ==
+                DialogResult.OK
+            )
+            {
+                if (clsProduct.DeleteProduct(productID))
+                {
+                    frmProductManagement_Load(null, null);
+                    MessageBox.Show("Product Deleted Successfully", "Success", MessageBoxButtons.OK);
+                } else
+                {
+                    MessageBox.Show("Something went wrong with delete operation", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
     }
 }

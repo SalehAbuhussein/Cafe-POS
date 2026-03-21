@@ -166,6 +166,7 @@ namespace Cafe_Management_System.Users
 
             _User.Username = userName;
             _User.Password = passwordHash;
+            _User.IsActive = true;
 
             if (_User.Save())
             {

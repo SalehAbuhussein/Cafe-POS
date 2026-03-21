@@ -117,7 +117,6 @@ namespace Cafe_Management_System.Orders
                 string customFilter = string.Format("CreatedAt >= #{0:M/dd/yyyy}# AND CreatedAt < #{1: M/dd/yyyy}#", dtEnd, dtStart);
                 _ordersInfo.DefaultView.RowFilter = string.Format(customFilter);
             }
-
         }
 
         private void _UpdateTotalSalesLabel()

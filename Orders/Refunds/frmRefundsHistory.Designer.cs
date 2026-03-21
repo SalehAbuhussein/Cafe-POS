@@ -37,6 +37,9 @@
             this.lblCount = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.controlBox1 = new ReaLTaiizor.Controls.ControlBox();
+            this.dpEnd = new System.Windows.Forms.DateTimePicker();
+            this.dpStart = new System.Windows.Forms.DateTimePicker();
+            this.cbFilter = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRefunds)).BeginInit();
             this.cmsRefundHistory.SuspendLayout();
             this.SuspendLayout();
@@ -125,11 +128,47 @@
             this.controlBox1.TabIndex = 9;
             this.controlBox1.Text = "controlBox1";
             // 
+            // dpEnd
+            // 
+            this.dpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dpEnd.Location = new System.Drawing.Point(290, 148);
+            this.dpEnd.Name = "dpEnd";
+            this.dpEnd.Size = new System.Drawing.Size(104, 20);
+            this.dpEnd.TabIndex = 22;
+            // 
+            // dpStart
+            // 
+            this.dpStart.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dpStart.Location = new System.Drawing.Point(180, 148);
+            this.dpStart.Name = "dpStart";
+            this.dpStart.Size = new System.Drawing.Size(104, 20);
+            this.dpStart.TabIndex = 21;
+            // 
+            // cbFilter
+            // 
+            this.cbFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbFilter.FormattingEnabled = true;
+            this.cbFilter.Items.AddRange(new object[] {
+            "All",
+            "Today",
+            "Yesterday",
+            "Last 7 Days",
+            "Last 30 Days",
+            "Custom"});
+            this.cbFilter.Location = new System.Drawing.Point(15, 148);
+            this.cbFilter.Name = "cbFilter";
+            this.cbFilter.Size = new System.Drawing.Size(145, 21);
+            this.cbFilter.TabIndex = 20;
+            this.cbFilter.SelectedIndexChanged += new System.EventHandler(this.cbFilter_SelectedIndexChanged);
+            // 
             // frmRefundsHistory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.dpEnd);
+            this.Controls.Add(this.dpStart);
+            this.Controls.Add(this.cbFilter);
             this.Controls.Add(this.controlBox1);
             this.Controls.Add(this.lblCount);
             this.Controls.Add(this.label2);
@@ -156,5 +195,8 @@
         private ReaLTaiizor.Controls.ControlBox controlBox1;
         private System.Windows.Forms.ContextMenuStrip cmsRefundHistory;
         private System.Windows.Forms.ToolStripMenuItem detailsToolStripMenuItem;
+        private System.Windows.Forms.DateTimePicker dpEnd;
+        private System.Windows.Forms.DateTimePicker dpStart;
+        private System.Windows.Forms.ComboBox cbFilter;
     }
 }

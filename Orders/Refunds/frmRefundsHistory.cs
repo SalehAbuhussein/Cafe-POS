@@ -29,6 +29,7 @@ namespace Cafe_Management_System.Refunds
         {
             clsUtil.ApplyRoundedCorners(20, this);
             _InitRefundHistoryTable();
+            cbFilter.SelectedIndex = 0;
         }
 
         private void _InitRefundHistoryTable()
@@ -53,6 +54,72 @@ namespace Cafe_Management_System.Refunds
 
             frmRefundItemDetails frm = new frmRefundItemDetails(refundID);
             frm.ShowDialog();
+        }
+
+        private void cbFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedFilter = cbFilter.SelectedItem.ToString();
+            DateTime today = DateTime.Today;
+            DateTime yesterday = DateTime.Today.AddDays(-1);
+            DateTime last7Days = DateTime.Today.AddDays(-7);
+            DateTime last30Days = DateTime.Today.AddDays(-30);
+            DateTime tomorrow = DateTime.Today.AddDays(1);
+
+            dpStart.Visible = false;
+            dpEnd.Visible = false;
+            dpStart.Value = DateTime.Today;
+            dpEnd.Value = DateTime.Today;
+
+            switch (selectedFilter)
+            {
+                case "All":
+                    _refundItemsInfo.DefaultView.RowFilter = "";
+                    break;
+                case "Today":
+                    string todayFilter = string.Format("CreatedAt >= #{0:M/dd/yyyy}# AND CreatedAt < #{1:M/dd/yyyy}#", today, tomorrow);
+                    _refundItemsInfo.DefaultView.RowFilter = todayFilter;
+                    break;
+                case "Yesterday":
+                    string yesterdayFilter = string.Format("CreatedAt >= #{0:M/dd/yyyy}# AND CreatedAt < #{1:M/dd/yyyy}#", yesterday, today);
+                    _refundItemsInfo.DefaultView.RowFilter = yesterdayFilter;
+                    break;
+                case "Last 7 Days":
+                    string lastWeekFilter = string.Format("CreatedAt >= #{0:M/dd/yyyy}# AND CreatedAt < #{1: M/dd/yyyy}#", last7Days, today);
+                    _refundItemsInfo.DefaultView.RowFilter = lastWeekFilter;
+                    break;
+                case "Last 30 Days":
+                    string last30DaysFilter = string.Format("CreatedAt >= #{0:M/dd/yyyy}# AND CreatedAt < #{1: M/dd/yyyy}#", last30Days, today);
+                    _refundItemsInfo.DefaultView.RowFilter = last30DaysFilter;
+                    break;
+                case "Custom":
+                    string customDateFilter = string.Format("CreatedAt >= #{0:M/dd/yyyy}# AND CreatedAt < #{1:M/dd/yyyy}#", today, tomorrow);
+                    _refundItemsInfo.DefaultView.RowFilter = customDateFilter;
+                    dpStart.Visible = true;
+                    dpEnd.Visible = true;
+                    break;
+                default:
+                    _refundItemsInfo.DefaultView.RowFilter = "";
+                    break;
+            }
+
+            lblCount.Text = _refundItemsInfo.DefaultView.Count.ToString();
+        }
+
+        private void dp_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime dtStart = dpStart.Value;
+            DateTime dtEnd = dpEnd.Value;
+
+            if (dtStart > dtEnd)
+            {
+                string customFilter = string.Format("CreatedAt >= #{0:M/dd/yyyy}# AND CreatedAt < #{1: M/dd/yyyy}#", dtStart, dtEnd);
+                _refundItemsInfo.DefaultView.RowFilter = string.Format(customFilter);
+            }
+            else
+            {
+                string customFilter = string.Format("CreatedAt >= #{0:M/dd/yyyy}# AND CreatedAt < #{1: M/dd/yyyy}#", dtEnd, dtStart);
+                _refundItemsInfo.DefaultView.RowFilter = string.Format(customFilter);
+            }
         }
     }
 }

@@ -42,6 +42,8 @@
             this.cbCategory = new System.Windows.Forms.ComboBox();
             this.parrotFormHandle1 = new ReaLTaiizor.Controls.ParrotFormHandle();
             this.controlBox1 = new ReaLTaiizor.Controls.ControlBox();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
             this.cmProducts.SuspendLayout();
             this.SuspendLayout();
@@ -75,9 +77,11 @@
             // 
             this.cmProducts.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.restockToolStripMenuItem,
-            this.productInfoToolStripMenuItem});
+            this.productInfoToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.deleteToolStripMenuItem});
             this.cmProducts.Name = "cmProducts";
-            this.cmProducts.Size = new System.Drawing.Size(181, 70);
+            this.cmProducts.Size = new System.Drawing.Size(181, 98);
             // 
             // restockToolStripMenuItem
             // 
@@ -182,6 +186,18 @@
             this.controlBox1.TabIndex = 8;
             this.controlBox1.Text = "controlBox1";
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
             // frmProductManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -225,5 +241,7 @@
         private ReaLTaiizor.Controls.ParrotFormHandle parrotFormHandle1;
         private ReaLTaiizor.Controls.ControlBox controlBox1;
         private System.Windows.Forms.ToolStripMenuItem productInfoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
     }
 }

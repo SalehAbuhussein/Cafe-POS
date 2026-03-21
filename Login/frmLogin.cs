@@ -98,5 +98,22 @@ namespace Cafe_Management_System
                 errorProvider1.SetError(tbPassword, null);
             }
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+                btnLogin_Click(null, null);
+                return true; // tells Windows: "I handled it"
+            }
+
+            if (keyData == Keys.Escape)
+            {
+                Close();
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
     }
 }
