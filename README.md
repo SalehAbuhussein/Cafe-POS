@@ -9,7 +9,7 @@ A desktop **Point of Sale (POS)** application built with **C# and Windows Forms*
 ### 🔐 Authentication & Users
 
 * User login system
-* Role-based access control (e.g., Owner, Staff)
+* Role-based access control (e.g., Owner, Casheir)
 * Edit user information
 * Change password
 
