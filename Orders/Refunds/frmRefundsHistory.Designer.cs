@@ -135,6 +135,7 @@
             this.dpEnd.Name = "dpEnd";
             this.dpEnd.Size = new System.Drawing.Size(104, 20);
             this.dpEnd.TabIndex = 22;
+            this.dpEnd.ValueChanged += new System.EventHandler(this.dp_ValueChanged);
             // 
             // dpStart
             // 
@@ -143,6 +144,7 @@
             this.dpStart.Name = "dpStart";
             this.dpStart.Size = new System.Drawing.Size(104, 20);
             this.dpStart.TabIndex = 21;
+            this.dpStart.ValueChanged += new System.EventHandler(this.dp_ValueChanged);
             // 
             // cbFilter
             // 

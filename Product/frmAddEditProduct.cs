@@ -56,16 +56,17 @@ namespace Cafe_Management_System.Product
 
             _Product = clsProduct.Find(_ProductID);
 
-            if (_Product != null)
+            if (_Product == null)
             {
-                MessageBox.Show("Invalid person data!", "Invalid Data", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Invalid product data!", "Invalid Data", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Close();
                 return;
             }
 
             tbName.Text = _Product.ProductName;
             tbQuantity.Text = _Product.Quantity.ToString();
-            cbCategory.SelectedIndex = cbCategory.FindString(_Product.ProductName);
+            tbPrice.Text = _Product.Price.ToString();
+            cbCategory.SelectedIndex = cbCategory.FindString(_Product.CategoryInfo.CategoryName);
             cbIsRestockable.Checked = _Product.IsRestockable;
         }
 
@@ -174,6 +175,8 @@ namespace Cafe_Management_System.Product
             {
                 MessageBox.Show("Something went wrong", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            Close();
         }
     }
 }

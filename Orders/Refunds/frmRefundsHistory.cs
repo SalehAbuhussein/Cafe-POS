@@ -36,9 +36,17 @@ namespace Cafe_Management_System.Refunds
         {
             _refundItemsInfo = _OrderID != null ? clsOrderRefund.GetRefundHistory(_OrderID ?? -1) : clsOrderRefund.GetRefundHistory();
             dgvRefunds.DataSource = _refundItemsInfo;
+
             dgvRefunds.Columns["OrderRefundID"].HeaderText = "ID";
             dgvRefunds.Columns["CreatedAt"].HeaderText = "Creation Date";
-            dgvRefunds.Columns["CreatedByUser"].HeaderText = "Created By ID";
+
+            if (_OrderID != null)
+            {
+                dgvRefunds.Columns.Remove("CreatedByUser");
+                dgvRefunds.Columns.Remove("RefundItemID");
+                dgvRefunds.Columns.Remove("RefundID");
+                dgvRefunds.Columns.Remove("OrderID");
+            }
 
             lblCount.Text = _refundItemsInfo.DefaultView.Count.ToString();
         }
@@ -92,10 +100,9 @@ namespace Cafe_Management_System.Refunds
                     _refundItemsInfo.DefaultView.RowFilter = last30DaysFilter;
                     break;
                 case "Custom":
-                    string customDateFilter = string.Format("CreatedAt >= #{0:M/dd/yyyy}# AND CreatedAt < #{1:M/dd/yyyy}#", today, tomorrow);
-                    _refundItemsInfo.DefaultView.RowFilter = customDateFilter;
                     dpStart.Visible = true;
                     dpEnd.Visible = true;
+                    dp_ValueChanged(null, null);
                     break;
                 default:
                     _refundItemsInfo.DefaultView.RowFilter = "";
@@ -107,17 +114,17 @@ namespace Cafe_Management_System.Refunds
 
         private void dp_ValueChanged(object sender, EventArgs e)
         {
-            DateTime dtStart = dpStart.Value;
-            DateTime dtEnd = dpEnd.Value;
+            DateTime dtStart = dpStart.Value.Date;
+            DateTime dtEnd = dpEnd.Value.Date;
 
-            if (dtStart > dtEnd)
+            if (dtStart < dtEnd)
             {
-                string customFilter = string.Format("CreatedAt >= #{0:M/dd/yyyy}# AND CreatedAt < #{1: M/dd/yyyy}#", dtStart, dtEnd);
+                string customFilter = string.Format("CreatedAt >= #{0:M/dd/yyyy}# AND CreatedAt < #{1:M/dd/yyyy}#", dtStart, dtEnd);
                 _refundItemsInfo.DefaultView.RowFilter = string.Format(customFilter);
             }
             else
             {
-                string customFilter = string.Format("CreatedAt >= #{0:M/dd/yyyy}# AND CreatedAt < #{1: M/dd/yyyy}#", dtEnd, dtStart);
+                string customFilter = string.Format("CreatedAt >= #{0:M/dd/yyyy}# AND CreatedAt < #{1:M/dd/yyyy}#", dtEnd, dtStart);
                 _refundItemsInfo.DefaultView.RowFilter = string.Format(customFilter);
             }
         }

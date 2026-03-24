@@ -31,8 +31,8 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.ctrlOrderItem1 = new Cafe_Management_System.Orders.Controls.ctrlOrderItem();
             this.controlBox1 = new ReaLTaiizor.Controls.ControlBox();
+            this.ctrlOrderItem1 = new Cafe_Management_System.Orders.Controls.ctrlOrderItem();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,16 +68,6 @@
             this.flowLayoutPanel1.TabIndex = 0;
             this.flowLayoutPanel1.WrapContents = false;
             // 
-            // ctrlOrderItem1
-            // 
-            this.ctrlOrderItem1.EnableAdding = false;
-            this.ctrlOrderItem1.ForeColor = System.Drawing.Color.White;
-            this.ctrlOrderItem1.Location = new System.Drawing.Point(3, 3);
-            this.ctrlOrderItem1.Name = "ctrlOrderItem1";
-            this.ctrlOrderItem1.Size = new System.Drawing.Size(528, 37);
-            this.ctrlOrderItem1.TabIndex = 0;
-            this.ctrlOrderItem1.OnItemAdded += new System.Action<Types.OrderTypes.stOrderItem>(this.ctrlOrderItem1_OnItemAdded);
-            // 
             // controlBox1
             // 
             this.controlBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(63)))), ((int)(((byte)(65)))));
@@ -96,6 +86,15 @@
             this.controlBox1.Size = new System.Drawing.Size(90, 25);
             this.controlBox1.TabIndex = 5;
             this.controlBox1.Text = "controlBox1";
+            // 
+            // ctrlOrderItem1
+            // 
+            this.ctrlOrderItem1.Location = new System.Drawing.Point(3, 3);
+            this.ctrlOrderItem1.Mode = Cafe_Management_System.Orders.Controls.ctrlOrderItem.enMode.AddOrder;
+            this.ctrlOrderItem1.Name = "ctrlOrderItem1";
+            this.ctrlOrderItem1.Size = new System.Drawing.Size(520, 37);
+            this.ctrlOrderItem1.TabIndex = 0;
+            this.ctrlOrderItem1.OnItemAdded += new System.Action<int>(this.ctrlOrderItem1_OnItemAdded);
             // 
             // frmAddOrder
             // 
@@ -125,7 +124,7 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private Controls.ctrlOrderItem ctrlOrderItem1;
         private ReaLTaiizor.Controls.ControlBox controlBox1;
+        private Controls.ctrlOrderItem ctrlOrderItem1;
     }
 }

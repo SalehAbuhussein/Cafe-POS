@@ -49,6 +49,12 @@ namespace Cafe_Management_System.Orders
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            if (clsProduct.IsNoProdutsAvailable())
+            {
+                MessageBox.Show("No products avaialble to purchase, Please make sure there is enough quantity!", "No Available Product Stock", MessageBoxButtons.OK);
+                return;
+            }
+
             frmAddOrder frm = new frmAddOrder();
             frm.ShowDialog();
             frmOrderManagement_Load(null, null);
@@ -90,7 +96,7 @@ namespace Cafe_Management_System.Orders
                     _ordersInfo.DefaultView.RowFilter = last30DaysFilter;
                     break;
                 case "Custom":
-                    string customDateFilter = string.Format("CreatedAt >= #{0:M/dd/yyyy}# AND CreatedAt < #{1:M/dd/yyyy}#", today, tomorrow);
+                    dp_ValueChanged(null, null);
                     dpStart.Visible = true;
                     dpEnd.Visible = true;
                     break;
@@ -105,10 +111,10 @@ namespace Cafe_Management_System.Orders
 
         private void dp_ValueChanged(object sender, EventArgs e)
         {
-            DateTime dtStart = dpStart.Value;
-            DateTime dtEnd = dpEnd.Value;
+            DateTime dtStart = dpStart.Value.Date;
+            DateTime dtEnd = dpEnd.Value.Date;
 
-            if (dtStart > dtEnd)
+            if (dtStart < dtEnd)
             {
                 string customFilter = string.Format("CreatedAt >= #{0:M/dd/yyyy}# AND CreatedAt < #{1: M/dd/yyyy}#", dtStart, dtEnd);
                 _ordersInfo.DefaultView.RowFilter = string.Format(customFilter);
@@ -133,9 +139,12 @@ namespace Cafe_Management_System.Orders
 
         private void dgvOrders_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            int orderID = (int)dgvOrders.Rows[e.RowIndex].Cells["OrderID"].Value;
-            frmOrderDetails frm = new frmOrderDetails(orderID);
-            frm.ShowDialog();
+            if (e.RowIndex > -1)
+            {
+                int orderID = (int)dgvOrders.Rows[e.RowIndex].Cells["OrderID"].Value;
+                frmOrderDetails frm = new frmOrderDetails(orderID);
+                frm.ShowDialog();
+            } 
         }
 
         private void detailsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -169,6 +178,29 @@ namespace Cafe_Management_System.Orders
 
             frmRefundsHistory frm = new frmRefundsHistory(orderID);
             frm.ShowDialog();
+        }
+
+        private void dgvOrders_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvOrders.Columns[e.ColumnIndex].Name == "Status")
+            {
+                string status = e.Value?.ToString();
+
+                if (status == "Paid")
+                {
+                    e.CellStyle.ForeColor = Color.FromArgb(100, 200, 120);
+                }
+
+                if (status == "Partial Refunded")
+                {
+                    e.CellStyle.ForeColor = Color.FromArgb(150, 200, 210);
+                }
+
+                if (status == "Refunded")
+                {
+                    e.CellStyle.ForeColor = Color.FromArgb(230, 160, 80);
+                }
+            }
         }
     }
 }

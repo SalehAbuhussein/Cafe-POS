@@ -43,6 +43,7 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnSave = new System.Windows.Forms.Button();
             this.controlBox1 = new ReaLTaiizor.Controls.ControlBox();
+            this.parrotFormHandle1 = new ReaLTaiizor.Controls.ParrotFormHandle();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -201,6 +202,11 @@
             this.controlBox1.TabIndex = 4;
             this.controlBox1.Text = "controlBox1";
             // 
+            // parrotFormHandle1
+            // 
+            this.parrotFormHandle1.DockAtTop = true;
+            this.parrotFormHandle1.HandleControl = this;
+            // 
             // frmAddEditProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -241,5 +247,6 @@
         private System.Windows.Forms.TextBox tbPrice;
         private System.Windows.Forms.Label label1;
         private ReaLTaiizor.Controls.ControlBox controlBox1;
+        private ReaLTaiizor.Controls.ParrotFormHandle parrotFormHandle1;
     }
 }

@@ -9,8 +9,6 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-using OrderTypes = Types.OrderTypes;
-
 namespace Cafe_Management_System.Orders
 {
     public partial class frmOrderRefunds : CrownForm
@@ -58,11 +56,10 @@ namespace Cafe_Management_System.Orders
                     return;
                 }
 
-                // TODO: this might need to be moved into 2 modes => Add Order / Refund Order
-                ctrl.ComboboxEnable = false;
-                ctrl.IsAddVisible = false;
-                ctrl.ForeColor = Color.White;
-                ctrl.Item = new OrderTypes.stOrderItem(product.ProductName, product.ProductID ?? -1, Convert.ToInt32(row["RemainingQty"]), Convert.ToDecimal(row["UnitPrice"]));
+                ctrl.Mode = ctrlOrderItem.enMode.RefundOrder;
+                ctrl.OrderItemID = Convert.ToInt32(row["OrderItemID"]);
+                ctrl.SetForeColor(Color.White);
+                ctrl.InitComponent();
 
                 flowLayoutPanel1.Controls.Add(ctrl);
             }
@@ -91,9 +88,10 @@ namespace Cafe_Management_System.Orders
             {
                 isValid = false;
 
-                if (ctrl.IsValid && ctrl.Quantity <= ctrl.Item.RemainingQuantity && ctrl.Quantity > 0)
+                if (ctrl.IsValid)
                 {
                     isValid = true;
+                    break;
                 }
             }
 
@@ -104,19 +102,22 @@ namespace Cafe_Management_System.Orders
         {
             DataTable dt = new DataTable();
 
-            List<OrderTypes.stOrderItem> lst = flowLayoutPanel1.Controls
+            List<Types.DTOOrderItem> lst = flowLayoutPanel1.Controls
                 .OfType<ctrlOrderItem>()
-                .Select(c => c.Item)
+                .Select(c => c.SelectedItem)
                 .ToList();
 
             dt.Columns.Add("OrderItemID", typeof(Int32));
             dt.Columns.Add("Quantity", typeof(Int32));
 
-            foreach (ctrlOrderItem ctrl in flowLayoutPanel1.Controls)
+            for (int i = 0; i < lst.Count; i++)
             {
-                clsOrderItem orderItem = clsOrderItem.FindByOrderAndProductID(_OrderID ?? -1, ctrl.Item.ProductID);
+                Types.DTOOrderItem item = lst[i];
 
-                dt.Rows.Add(orderItem.OrderItemID, ctrl.Quantity);
+                if (item.Qty > 0)
+                {
+                    dt.Rows.Add(item.ID, item.Qty);
+                }
             }
 
             return dt;

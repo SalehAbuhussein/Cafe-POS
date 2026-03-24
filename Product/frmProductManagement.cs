@@ -33,7 +33,7 @@ namespace Cafe_Management_System.Product
 
         private void _InitProductDgv()
         {
-            _productData = clsProduct.FindAll();
+            _productData = clsProduct.FindAvailableProducts();
             dgvProducts.DataSource = _productData;
 
             dgvProducts.Columns["ProductID"].HeaderText = "ID";
@@ -42,7 +42,7 @@ namespace Cafe_Management_System.Product
             dgvProducts.Columns["IsRestockable"].HeaderText = "Restockable";
             dgvProducts.Columns["CreatedAt"].HeaderText = "Creation Date";
 
-            lblCount.Text = _productData.Rows.Count.ToString();
+            lblCount.Text = _productData.DefaultView.Count.ToString();
         }
 
         private void _UpdateAddBtnPermission()
@@ -89,7 +89,6 @@ namespace Cafe_Management_System.Product
         {
             tbFilter.Text = string.Empty;
             _productData.DefaultView.RowFilter = "";
-            lblCount.Text = "0";
             tbFilter.Visible = cbFilter.SelectedItem.ToString() != "Category";
             cbCategory.Visible = cbFilter.SelectedItem.ToString() == "Category";
         }
@@ -159,6 +158,14 @@ namespace Cafe_Management_System.Product
             int productID = Convert.ToInt32(dgvProducts.CurrentRow.Cells["ProductID"].Value);
             frmProductInfo frm = new frmProductInfo(productID);
             frm.ShowDialog();
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int productID = Convert.ToInt32(dgvProducts.CurrentRow.Cells["ProductID"].Value);
+            frmAddEditProduct frm = new frmAddEditProduct(productID);
+            frm.ShowDialog();
+            frmProductManagement_Load(null, null);
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)

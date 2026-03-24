@@ -33,7 +33,7 @@
             this.tbQuantity = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.lblRemainingQty = new System.Windows.Forms.Label();
+            this.lblQty = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnAdd
@@ -84,21 +84,21 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Product:";
             // 
-            // lblRemainingQty
+            // lblQty
             // 
-            this.lblRemainingQty.AutoSize = true;
-            this.lblRemainingQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRemainingQty.Location = new System.Drawing.Point(389, 13);
-            this.lblRemainingQty.Name = "lblRemainingQty";
-            this.lblRemainingQty.Size = new System.Drawing.Size(14, 13);
-            this.lblRemainingQty.TabIndex = 11;
-            this.lblRemainingQty.Text = "0";
+            this.lblQty.AutoSize = true;
+            this.lblQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblQty.Location = new System.Drawing.Point(389, 13);
+            this.lblQty.Name = "lblQty";
+            this.lblQty.Size = new System.Drawing.Size(14, 13);
+            this.lblQty.TabIndex = 11;
+            this.lblQty.Text = "0";
             // 
             // ctrlOrderItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.lblRemainingQty);
+            this.Controls.Add(this.lblQty);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.cbProduct);
             this.Controls.Add(this.tbQuantity);
@@ -118,6 +118,6 @@
         private System.Windows.Forms.TextBox tbQuantity;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lblRemainingQty;
+        private System.Windows.Forms.Label lblQty;
     }
 }

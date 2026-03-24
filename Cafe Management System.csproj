@@ -279,7 +279,7 @@
       <Name>BusinessLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Types\Types.csproj">
-      <Project>{97da47e2-fc8e-4528-a652-59f81f7b5703}</Project>
+      <Project>{39212698-246f-4167-b129-09e43473f840}</Project>
       <Name>Types</Name>
     </ProjectReference>
   </ItemGroup>

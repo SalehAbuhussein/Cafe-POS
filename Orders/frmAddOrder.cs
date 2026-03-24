@@ -4,15 +4,8 @@ using Cafe_Management_System.Orders.Controls;
 using ReaLTaiizor.Forms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using OrderTypes = Types.OrderTypes;
 
 namespace Cafe_Management_System.Orders
 {
@@ -25,8 +18,9 @@ namespace Cafe_Management_System.Orders
 
         private void frmAddOrder_Load(object sender, EventArgs e)
         {
-            ctrlOrderItem1.ForeColor = Color.White;
             clsUtil.ApplyRoundedCorners(20, this);
+            ctrlOrderItem1.InitComponent();
+            ctrlOrderItem1.SetForeColor(Color.White);
         }
 
         public bool IsOrderItemValid()
@@ -55,33 +49,29 @@ namespace Cafe_Management_System.Orders
             return isValid;
         }
 
-        private void ctrlOrderItem1_OnItemAdded(OrderTypes.stOrderItem obj)
+        private Dictionary<string, Types.DTOOrderItem> _GetOrderItems()
         {
-            ctrlOrderItem ctrl = new ctrlOrderItem();
-            ctrl.ForeColor = Color.White;
-            ctrl.OnItemAdded += ctrlOrderItem1_OnItemAdded;
-            flowLayoutPanel1.Controls.Add(ctrl);
-        }
-
-        private Dictionary<string, OrderTypes.stOrderItem> _GetOrderItems()
-        {
-            Dictionary<string, OrderTypes.stOrderItem> items = new Dictionary<string, OrderTypes.stOrderItem>();
+            Dictionary<string, Types.DTOOrderItem> items = new Dictionary<string, Types.DTOOrderItem>();
 
             foreach (ctrlOrderItem ctrl in flowLayoutPanel1.Controls)
             {
-                if (items.TryGetValue(ctrl.Item.ProductText, out OrderTypes.stOrderItem item))
+                Types.DTOOrderItem item = ctrl.SelectedItem;
+
+                if (items.TryGetValue(item.ProductID.ToString(), out Types.DTOOrderItem insertedItem))
                 {
-                    items[ctrl.Item.ProductText] = new OrderTypes.stOrderItem(ctrl.Item.ProductText, ctrl.Item.ProductID, ctrl.Item.RemainingQuantity + item.RemainingQuantity, item.PricePerUnit);
-                } else
+                    item.Qty += insertedItem.Qty;
+                    items[item.ID.ToString()] = item;
+                }
+                else
                 {
-                    items.Add(ctrl.Item.ProductText, ctrl.Item);
+                    items.Add(item.ProductID.ToString(), item);
                 }
             }
 
             return items;
         }
 
-        private bool _IsOrderValid(Dictionary<string, OrderTypes.stOrderItem> orderItems)
+        private bool _IsOrderValid()
         {
             bool isValid = true;
 
@@ -89,9 +79,7 @@ namespace Cafe_Management_System.Orders
             {
                 ctrlOrderItem ctrl = (ctrlOrderItem)flowLayoutPanel1.Controls[i];
 
-                int remainingQty = ctrl.Item.RemainingQuantity;
-
-                if (ctrl.Quantity > remainingQty)
+                if (!ctrl.IsValid)
                 {
                     isValid = false;
                     break;
@@ -109,13 +97,13 @@ namespace Cafe_Management_System.Orders
                 return;
             }
 
-            Dictionary<string, OrderTypes.stOrderItem> orderItems = _GetOrderItems();
-            if (!_IsOrderValid(orderItems))
+            if (!_IsOrderValid())
             {
                 MessageBox.Show("Valid order");
                 return;
             }
 
+            Dictionary<string, Types.DTOOrderItem> orderItems = _GetOrderItems();
             if (clsOrder.MakeOrder(orderItems, clsCurrentUser.UserInfo.UserID ?? -1))
             {
                 MessageBox.Show("Order has been ordered successfully!!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -125,6 +113,15 @@ namespace Cafe_Management_System.Orders
             {
                 MessageBox.Show("Something went wrong!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void ctrlOrderItem1_OnItemAdded(int orderItemID)
+        {
+            ctrlOrderItem ctrl = new ctrlOrderItem();
+            ctrl.InitComponent();
+            ctrl.SetForeColor(Color.White);
+            ctrl.OnItemAdded += ctrlOrderItem1_OnItemAdded;
+            flowLayoutPanel1.Controls.Add(ctrl);
         }
     }
 }

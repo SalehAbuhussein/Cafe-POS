@@ -129,9 +129,12 @@ namespace Cafe_Management_System
 
         private void dgvOrders_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            int orderID = (int)dgvOrders.Rows[e.RowIndex].Cells["OrderID"].Value;
-            frmOrderDetails frm = new frmOrderDetails(orderID);
-            frm.ShowDialog();
+            if (e.RowIndex > -1)
+            {
+                int orderID = (int)dgvOrders.Rows[e.RowIndex].Cells["OrderID"].Value;
+                frmOrderDetails frm = new frmOrderDetails(orderID);
+                frm.ShowDialog();
+            }
         }
 
         private void detailsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -146,7 +149,7 @@ namespace Cafe_Management_System
             int orderID = (int)dgvOrders.CurrentRow.Cells["OrderID"].Value;
             frmOrderRefunds frm = new frmOrderRefunds(orderID);
             frm.ShowDialog();
-            dgvOrders.DataSource = clsOrder.GetOrdersSummary();
+            frmMain_Load(null, null);
         }
 
         private void cmsOrders_Opening(object sender, CancelEventArgs e)
