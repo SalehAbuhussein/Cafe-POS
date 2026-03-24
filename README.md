@@ -52,7 +52,8 @@ A desktop **Point of Sale (POS)** application built with **C# and Windows Forms*
 
 The following diagram shows the database design of the system:
 
-<img width="1311" height="819" alt="Cafe POS drawio" src="https://github.com/user-attachments/assets/2d1b0280-0c22-4f7c-a11e-d0eb85d4f831" />
+<img width="1311" height="819" alt="Cafe Management System drawio" src="https://github.com/user-attachments/assets/6d530900-99c3-4e43-8535-1a6b9994db06" />
+
 
 * Users and roles are connected through a many-to-many relationship.
 * Orders contain multiple order items.
